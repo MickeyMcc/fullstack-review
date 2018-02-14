@@ -9,20 +9,15 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.post('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
+
   helpers.getReposByUsername(req.body.query, function(err, body) {
     if (err) {
       console.log(err);
+      res.status(500).end(err);
     } else {
       repos = JSON.parse(body);
-      const numRepos = repos.length;
       dbMethods.save(repos);
-      //console.log('RESPONSEEEEEEE', res, 'END OF RESSSSSSPONSSSEEE');
-      //save(res);
-      res.end(JSON.stringify({ message: `${numRepos} found on github for ${req.body.query}`}));
+      res.status(201).end(JSON.stringify({ message: `${repos.length} found on github for ${req.body.query}`}));
     }
   });
 
