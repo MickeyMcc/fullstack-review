@@ -1,5 +1,5 @@
 const request = require('request');
-const config = require('../config.js');
+//const config = require('../config.js');
 
 let getReposByUsername = (/* TODO */) => {
   // TODO - Use the request module to request repos for a specific
@@ -7,11 +7,13 @@ let getReposByUsername = (/* TODO */) => {
 
   // The options object has been provided to help you out, 
   // but you'll have to fill in the URL
+  var url = 'https://api.github.com';
+  console.log('you made it!');
   let options = {
     url: 'FILL ME IN',
     headers: {
-      'User-Agent': 'request',
-      'Authorization': `token ${config.TOKEN}`
+      'User-Agent': 'request'
+      //'Authorization': `token ${config.TOKEN}`
     }
   };
 

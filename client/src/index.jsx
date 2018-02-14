@@ -16,12 +16,14 @@ class App extends React.Component {
     console.log(`${term} was searched`);
     $.ajax({
       method: 'POST',
-      url: 'http: 127.0.0.1:1128/repos',
-      data:  {
+      url: '/repos',
+      contentType: 'application/json',
+      data:  JSON.stringify({
         query: term
-      },
+      }),
       success: function(data) {
-        console.log('successful search', data);
+        const response = JSON.parse(data);
+        console.log('successful search', response.message);
       }, 
       error: function(err) {
         console.log(err, 'error');
