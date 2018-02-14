@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fetcher');
 
-let repoSchema = mongoose.Schema({
-  // TODO: your schema here!
+let repoSchema = mongoose.Schema({  //prop lookups on API query 
+  name: String,       // ['name']
+  owner_name: String, // ['owner']['login']
+  stargazers: Integer,// ['stargazers_count']
+  url: String,        // ['html_url']
+  avatar_url: String  // ['avatar_url']
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
