@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-config = require('../config.js');
+//config = require('../config.js');
 //mongoose.connect('mongodb://localhost/fetcher');
-
+require('../config.js').DATABASE_URI
 console.log(process.env);
-mongoose.connect(process.env.DATABASE_URI || config.DATABASE_URI);
+mongoose.connect(process.env.DATABASE_URI || require('../config.js').DATABASE_URI);
 let repoSchema = mongoose.Schema({  //prop lookups on API query 
   name: String,       // ['name']
   owner_name: String, // ['owner']['login']
