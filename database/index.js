@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+
+config = require('../config.js');
 //mongoose.connect('mongodb://localhost/fetcher');
 
-
-const uri = `mongodb://heroku_35z7t93n:kdfotp4ptp566vvckc08r30r7q@ds235778.mlab.com:35778/heroku_35z7t93n`;
-mongoose.connect(process.env.DATABASE);
+console.log(process.env);
+mongoose.connect(process.env.DATABASE_URI || config.DATABASE_URI);
 let repoSchema = mongoose.Schema({  //prop lookups on API query 
   name: String,       // ['name']
   owner_name: String, // ['owner']['login']

@@ -4,6 +4,8 @@ const helpers = require('../helpers/github');
 const dbMethods = require('../database/index');
 let app = express();
 
+require('dotenv').config();
+
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.use(bodyParser.json());
