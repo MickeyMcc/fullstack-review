@@ -9,24 +9,28 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.post('/repos', function (req, res) {
-
-  helpers.getReposByUsername(req.body.query, function(err, body) {
+  let username = req.body.query;
+  helpers.getReposByUsername(username, function(err, body) {
     if (err) {
       console.log(err);
       res.status(500).end(err);
     } else {
       repos = JSON.parse(body);
-      dbMethods.save(repos);
+      dbMethods.save(username, repos);
       res.status(201).end(JSON.stringify({ message: `${repos.length} found on github for ${req.body.query}`}));
     }
   });
-
-
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
+  dbMethods.query(function(err, repos) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(repos);
+      res.status(200).end(JSON.stringify(repos));
+    }
+  })
 });
 
 let port = 1128;

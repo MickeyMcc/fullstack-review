@@ -12,7 +12,29 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount () {
+    console.log('mounted');
+    this.getTopRepos();
+  }
+
+  getTopRepos () {
+    let context = this;
+    $.ajax({
+      method: 'GET',
+      url: '/repos',
+      contentType: 'application/json',
+      success: function (data) {
+        context.setState({ repos: JSON.parse(data) });
+        console.log()
+      },
+      error: function (err) {
+        console.log(err, 'error');
+      }
+    })
+  }
+
   search (term) {
+    var context = this;
     console.log(`${term} was searched`);
     $.ajax({
       method: 'POST',
@@ -24,6 +46,7 @@ class App extends React.Component {
       success: function(data) {
         const response = JSON.parse(data);
         console.log('successful search', response.message);
+        context.getTopRepos();
       }, 
       error: function(err) {
         console.log(err, 'error');
