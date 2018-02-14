@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+//mongoose.connect('mongodb://localhost/fetcher');
+
+mongoose.connect('mongodb://user:user@ds235768.mlab.com:35768/fetcher');
 
 let repoSchema = mongoose.Schema({  //prop lookups on API query 
   name: String,       // ['name']
